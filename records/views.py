@@ -4,6 +4,16 @@ from django.shortcuts import render
 from django.shortcuts import render
 from .models import Product, Category
 
+
+
+
+
+
+def home(request):
+    return render(request, 'home.html')
+
+
+
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'records/product_list.html', {'products': products})
