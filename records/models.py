@@ -19,3 +19,27 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+
+
+
+
+from django.db import models
+from .models import Product
+
+class Sale(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity_sold = models.PositiveIntegerField()
+    sale_price = models.DecimalField(max_digits=10, decimal_places=2)
+    sale_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Sale of {self.product} on {self.sale_date}"
+
+    def save(self, *args, **kwargs):
+        # Deduct sold quantity from available quantity of the product
+        self.product.quantity_available -= self.quantity_sold
+        self.product.save()  # Save the updated quantity_available field of the product
+        super().save(*args, **kwargs)  # Call the original save() method to save the Sale object

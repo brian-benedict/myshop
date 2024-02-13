@@ -57,3 +57,34 @@ def add_category(request):
     else:
         form = CategoryForm()
     return render(request, 'records/add_category.html', {'form': form})
+
+
+
+
+from django.shortcuts import render, redirect
+from .forms import SaleForm
+
+def record_sale(request):
+    if request.method == 'POST':
+        form = SaleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('sale_success')  # Redirect to a success page
+    else:
+        form = SaleForm()
+    return render(request, 'records/record_sale.html', {'form': form})
+
+def sale_success(request):
+    return render(request, 'records/sale_success.html')
+
+
+
+
+
+from django.shortcuts import render
+from django.db.models import Sum
+from .models import Sale
+
+def daily_sales(request):
+    daily_sales = Sale.objects.values('sale_date__date').annotate(total_sales=Sum('quantity_sold'))
+    return render(request, 'records/daily_sales.html', {'daily_sales': daily_sales})
