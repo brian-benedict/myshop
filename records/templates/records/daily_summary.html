@@ -10,9 +10,12 @@
     <p>Total Expenses: Tsh{{ total_expenses }}</p>
     <p>Net Income: Tsh{{ net_income }}</p>
     <a href="{% url 'record_expense' %}">Record Expense</a>
+    <form action="{% url 'send_daily_summary_email' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Send Daily Summary Email</button>
+    </form>
 
-
-    <h2>Sales</h2>
+    <h2 class="text-center">Sales</h2>
     <table class="table">
         <thead>
             <tr>
@@ -40,7 +43,7 @@
         </tbody>
     </table>
 
-    <h2>Expenses</h2>
+    <h2 class="text-center">Expenses</h2>
     <table class="table">
         <thead>
             <tr>

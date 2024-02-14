@@ -13,6 +13,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Category</th>
+                <th>Quantity</th>
                 <th>Price</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                     <td>{{ forloop.counter }}</td>  <!-- Use loop counter for ID -->
                     <td>{{ product.name }}</td>
                     <td>{{ product.category }}</td>
+                    <td>{{ product.quantity_available }}</td>
                     <td>{{ product.price }}</td>
                 </tr>
             {% empty %}

@@ -204,3 +204,58 @@ def expenses_summary(request):
     }
 
     return render(request, 'records/expenses_summary.html', context)
+
+
+
+
+
+
+
+
+
+
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils import timezone
+from records.models import Sale, Expense
+from django.db.models import Sum
+
+def send_daily_summary_email(request):
+    today = timezone.localdate()
+
+    # Retrieve total sales for the day
+    total_sales = Sale.objects.filter(sale_date__date=today).aggregate(total_sales=Sum('sale_price'))['total_sales'] or 0
+
+    # Retrieve total expenses for the day
+    total_expenses = Expense.objects.filter(expense_date__date=today).aggregate(total_expenses=Sum('amount'))['total_expenses'] or 0
+
+    # Calculate net income
+    net_income = total_sales - total_expenses
+
+    # Retrieve sales and expenses for the current day
+    sales = Sale.objects.filter(sale_date__date=today)
+    expenses = Expense.objects.filter(expense_date__date=today)
+
+    context = {
+        'total_sales': total_sales,
+        'total_expenses': total_expenses,
+        'net_income': net_income,
+        'sales': sales,
+        'expenses': expenses,
+    }
+
+    # Render daily summary template to HTML
+    html_content = render_to_string('records/daily_summary.html', context)
+
+    # Prepare email content
+    subject = f'Daily Summary - {today}'
+    recipient_list = ['brian.benedict@gretsauniversity.ac.ke']  # Replace with the owner's email
+
+    # Send email with HTML content
+    try:
+        send_mail(subject, '', None, recipient_list, html_message=html_content)
+        return HttpResponse('Daily summary email sent successfully')
+    except Exception as e:
+        return HttpResponse(f'Error sending daily summary email: {str(e)}')

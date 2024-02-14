@@ -15,6 +15,7 @@ urlpatterns = [
     path('record-sale/', views.record_sale, name='record_sale'),
     path('sale-success/', views.sale_success, name='sale_success'),
     path('expenses-summary/', views.expenses_summary, name='expenses_summary'),
+    path('send-daily-summary-email/', views.send_daily_summary_email, name='send_daily_summary_email'),
 
     # Add other URLs as needed
 ]
