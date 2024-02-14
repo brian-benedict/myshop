@@ -1,3 +1,6 @@
+
+
+
 {% extends 'base.html' %}
 
 {% block title %}
@@ -9,15 +12,17 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Total Sales</th>
+                <th>Product</th>
+                <th>Quantity Sold</th>
+                <th>Sale Amount</th>
             </tr>
         </thead>
         <tbody>
-            {% for sale in daily_sales %}
+            {% for sale in sales %}
                 <tr>
-                    <td>{{ sale.sale_date__date }}</td>
-                    <td>{{ sale.total_sales }}</td>
+                    <td>{{ sale.product }}</td>
+                    <td>{{ sale.quantity_sold }}</td>
+                    <td>{{ sale.sale_price }}</td>
                 </tr>
             {% endfor %}
         </tbody>

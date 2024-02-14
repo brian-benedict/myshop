@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Daily Summary
+{% endblock %}
+
+{% block content %}
+    <h1>Daily Summary</h1>
+    <p>Total Sales: Tsh{{ total_sales }}</p>
+    <p>Total Expenses: Tsh{{ total_expenses }}</p>
+    <p>Net Income: Tsh{{ net_income }}</p>
+    <a href="{% url 'record_expense' %}">Record Expense</a>
+
+
+    <h2>Sales</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product</th>
+                <th>Quantity Sold</th>
+                <th>Sale Amount</th>
+                <!-- Add other sale fields as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ sale.product }}</td>
+                    <td>{{ sale.quantity_sold }}</td>
+                    <td>{{ sale.sale_price }}</td>
+                    <!-- Add other sale fields as needed -->
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">No sales for today</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Expenses</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Expense Date</th>
+                <!-- Add other expense fields as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ expense.description }}</td>
+                    <td>{{ expense.amount }}</td>
+                    <td>{{ expense.expense_date }}</td>
+                    <!-- Add other expense fields as needed -->
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">No expenses for today</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}
+
+

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Daily Expenses
+{% endblock %}
+
+{% block content %}
+    <h1>Daily Expenses</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Expense Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+                <tr>
+                    <td>{{ expense.description }}</td>
+                    <td>{{ expense.amount }}</td>
+                    <td>{{ expense.expense_date }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No expenses recorded for today.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

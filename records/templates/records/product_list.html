@@ -1,13 +1,34 @@
 {% extends 'base.html' %}
 
-{% block title %}Products{% endblock %}
+{% block title %}
+    Product List
+{% endblock %}
 
 {% block content %}
-<h1>Products</h1>
-<ul>
-    {% for product in products %}
-        <li><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></li>
-    {% endfor %}
-</ul>
-<a href="{% url 'add_product' %}">Add Product</a>
+    <h1>Product List</h1>
+    <a href="{% url 'add_product' %}">Add Product</a>  <!-- Add Product link -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>  <!-- Use loop counter for ID -->
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.price }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">No products available</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
