@@ -5,15 +5,17 @@
 {% endblock %}
 
 {% block content %}
+<div class="container">
     <h1>{{ category.name }}</h1>
     <p>Description: {{ category.description }}</p>
     <h2>Products in this Category:</h2>
-    <ul>
+    <ul class="list-group">
         {% for product in products %}
-            <li><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></li>
+            <li class="list-group-item"><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></li>
         {% empty %}
-            <li>No products in this category yet.</li>
+            <li class="list-group-item">No products in this category yet.</li>
         {% endfor %}
     </ul>
-    <a href="{% url 'category_list' %}">Back to Categories</a>
+    <a href="{% url 'category_list' %}" class="btn btn-secondary mt-3">Back to Categories</a>
+</div>
 {% endblock %}

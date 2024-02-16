@@ -5,39 +5,41 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Product List</h1>
-    <a href="{% url 'add_product' %}">Add Product</a>  <!-- Add Product link -->
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Quantity</th>
-                <th>Price Bought</th>
-                <th>Sell Price</th>
-                <th>Actions</th>  <!-- Add Actions column -->
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in products %}
+    <div class="container">
+        <h1>Product List</h1>
+        <a href="{% url 'add_product' %}" class="btn btn-primary mb-3">Add Product</a> <!-- Add Product link -->
+        <table class="table">
+            <thead class="thead-dark">
                 <tr>
-                    <td>{{ forloop.counter }}</td>  <!-- Use loop counter for ID -->
-                    <td>{{ product.name }}</td>
-                    <td>{{ product.category }}</td>
-                    <td>{{ product.quantity_available }}</td>
-                    <td>{{ product.price_bought }}</td>
-                    <td>{{ product.price }}</td>
-                    <td>
-                        <a href="{% url 'edit_product' product.pk %}">Edit</a> |  <!-- Edit Product link -->
-                        <a href="{% url 'delete_product' product.pk %}">Delete</a>  <!-- Delete Product link -->
-                    </td>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Price Bought</th>
+                    <th>Sell Price</th>
+                    <th>Actions</th> <!-- Add Actions column -->
                 </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="7">No products available</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td> <!-- Use loop counter for ID -->
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.category }}</td>
+                        <td>{{ product.quantity_available }}</td>
+                        <td>{{ product.price_bought }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>
+                            <a href="{% url 'edit_product' product.pk %}" class="btn btn-sm btn-info">Edit</a> <!-- Edit Product link -->
+                            <a href="{% url 'delete_product' product.pk %}" class="btn btn-sm btn-danger">Delete</a> <!-- Delete Product link -->
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="7">No products available</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

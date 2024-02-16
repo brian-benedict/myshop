@@ -5,20 +5,27 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Daily Summary</h1>
-    <p>Total Sales: Tsh{{ total_sales }}</p>
-    <p>Total Expenses: Tsh{{ total_expenses }}</p>
-    <p>Net Income: Tsh{{ net_income }}</p>
-    <p>Net profit: Tsh{{ net_profit }}</p>
-    <a href="{% url 'record_expense' %}">Record Expense</a>
-    <form action="{% url 'send_daily_summary_email' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Send Daily Summary Email</button>
-    </form>
+<div class="container">
+    <h1 class="text-center">Daily Summary</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Total Sales: Tsh{{ total_sales }}</h3>
+            <h3>Total Expenses: Tsh{{ total_expenses }}</h3>
+            <h3>Net Income: Tsh{{ net_income }}</h3>
+            <h3>Net Profit: Tsh{{ net_profit }}</h3>
+        </div>
+        <div class="col-md-6">
+            <a href="{% url 'record_expense' %}" class="btn btn-primary">Record Expense</a>
+            <form action="{% url 'send_daily_summary_email' %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">Send Daily Summary Email</button>
+            </form>
+        </div>
+    </div>
 
-    <h2 class="text-center">Sales</h2>
-    <table class="table">
-        <thead>
+    <h2 class="text-center mt-5">Sales</h2>
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
                 <th>ID</th>
                 <th>Product</th>
@@ -26,7 +33,6 @@
                 <th>Sale Amount</th>
                 <th>Cost Price</th>
                 <th>Profit</th>
-                <!-- Add other sale fields as needed -->
             </tr>
         </thead>
         <tbody>
@@ -36,27 +42,25 @@
                     <td>{{ sale.product }}</td>
                     <td>{{ sale.quantity_sold }}</td>
                     <td>{{ sale.sale_price }}</td>
-                    <td>{{ sale.product.price_bought }}</td>  <!-- Assuming the cost price is stored in the Product model -->
+                    <td>{{ sale.product.price_bought }}</td>
                     <td>{{ sale.profit }}</td>
-                    <!-- Add other sale fields as needed -->
                 </tr>
             {% empty %}
                 <tr>
-                    <td colspan="4">No sales for today</td>
+                    <td colspan="6">No sales for today</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <h2 class="text-center">Expenses</h2>
-    <table class="table">
-        <thead>
+    <h2 class="text-center mt-5">Expenses</h2>
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
                 <th>ID</th>
                 <th>Description</th>
                 <th>Amount</th>
                 <th>Expense Date</th>
-                <!-- Add other expense fields as needed -->
             </tr>
         </thead>
         <tbody>
@@ -66,7 +70,6 @@
                     <td>{{ expense.description }}</td>
                     <td>{{ expense.amount }}</td>
                     <td>{{ expense.expense_date }}</td>
-                    <!-- Add other expense fields as needed -->
                 </tr>
             {% empty %}
                 <tr>
@@ -75,7 +78,5 @@
             {% endfor %}
         </tbody>
     </table>
-    
+</div>
 {% endblock %}
-
-

@@ -3,11 +3,15 @@
 {% block title %}Categories{% endblock %}
 
 {% block content %}
-<h1>Categories</h1>
-<ul>
-    {% for category in categories %}
-        <li><a href="{% url 'category_detail' category.id %}">{{ category.name }}</a></li>
-    {% endfor %}
-</ul>
-<a href="{% url 'add_category' %}">Add Category</a>
+<div class="container">
+    <h1>Categories</h1>
+    <ul class="list-group">
+        {% for category in categories %}
+            <li class="list-group-item"><a href="{% url 'category_detail' category.id %}">{{ category.name }}</a></li>
+        {% empty %}
+            <li class="list-group-item">No categories available</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_category' %}" class="btn btn-primary mt-3">Add Category</a>
+</div>
 {% endblock %}

@@ -5,9 +5,10 @@
 {% endblock %}
 
 {% block content %}
+<div class="container">
     <h1>Daily Sales</h1>
-    <table class="table">
-        <thead>
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
                 <th>Product</th>
                 <th>Quantity Sold</th>
@@ -25,8 +26,12 @@
                     <td>{{ sale.product.price_bought }}</td>  <!-- Assuming the cost price is stored in the Product model -->
                     <td>{{ sale.profit }}</td>
                 </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">No sales recorded for today.</td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>
+</div>
 {% endblock %}
-

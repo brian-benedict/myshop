@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
-{% block title %}Record Sale{% endblock %}
+{% block title %}
+    Record Sale
+{% endblock %}
 
 {% block content %}
-<h1>Record Sale</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Record Sale</button>
-</form>
+<div class="container">
+    <h1 class="mb-4">Record Sale</h1>
+    <form method="post" class="col-md-6">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Record Sale</button>
+    </form>
+</div>
 {% endblock %}

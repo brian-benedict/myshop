@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="container">
     <h1>Reservation Payments</h1>
     <p>Customer: {{ reservation.customer_name }}</p>
     <p>Product: {{ reservation.product_reserved }}</p>
@@ -32,4 +33,5 @@
         </tbody>
     </table>
     <a href="{% url 'add_reservation_payment' reservation.id %}" class="btn btn-primary">Add Payment</a>
+</div>
 {% endblock %}

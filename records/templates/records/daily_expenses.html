@@ -5,9 +5,10 @@
 {% endblock %}
 
 {% block content %}
+<div class="container">
     <h1>Daily Expenses</h1>
-    <table class="table">
-        <thead>
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
                 <th>Description</th>
                 <th>Amount</th>
@@ -28,4 +29,5 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
 {% endblock %}
