@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Reservation Payments
+{% endblock %}
+
+{% block content %}
+    <h1>Reservation Payments</h1>
+    <p>Customer: {{ reservation.customer_name }}</p>
+    <p>Product: {{ reservation.product_reserved }}</p>
+    <p>Target Amount: {{ reservation.target_amount }}</p>
+    <hr>
+    <h2>Payments</h2>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for payment in payments %}
+                <tr>
+                    <td>{{ payment.amount }}</td>
+                    <td>{{ payment.payment_date }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="2">No payments yet</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'add_reservation_payment' reservation.id %}" class="btn btn-primary">Add Payment</a>
+{% endblock %}

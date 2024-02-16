@@ -16,6 +16,13 @@ urlpatterns = [
     path('sale-success/', views.sale_success, name='sale_success'),
     path('expenses-summary/', views.expenses_summary, name='expenses_summary'),
     path('send-daily-summary-email/', views.send_daily_summary_email, name='send_daily_summary_email'),
+    path('products/<int:pk>/edit/', views.edit_product, name='edit_product'),
+    path('products/<int:pk>/delete/', views.delete_product, name='delete_product'),
+    path('reservations/', views.reservation_list, name='reservation_list'),
+    path('reservations/<int:reservation_id>/payments/', views.reservation_payments, name='reservation_payments'),
+    path('reservations/register/', views.register_reservation, name='register_reservation'),
+    path('reservations/<int:reservation_id>/add_payment/', views.add_reservation_payment, name='add_reservation_payment'),
+    path('reservations/<int:reservation_id>/', views.reservation_detail, name='reservation_detail'),
 
     # Add other URLs as needed
 ]

@@ -9,6 +9,7 @@
     <p>Total Sales: Tsh{{ total_sales }}</p>
     <p>Total Expenses: Tsh{{ total_expenses }}</p>
     <p>Net Income: Tsh{{ net_income }}</p>
+    <p>Net profit: Tsh{{ net_profit }}</p>
     <a href="{% url 'record_expense' %}">Record Expense</a>
     <form action="{% url 'send_daily_summary_email' %}" method="post">
         {% csrf_token %}
@@ -23,6 +24,8 @@
                 <th>Product</th>
                 <th>Quantity Sold</th>
                 <th>Sale Amount</th>
+                <th>Cost Price</th>
+                <th>Profit</th>
                 <!-- Add other sale fields as needed -->
             </tr>
         </thead>
@@ -33,6 +36,8 @@
                     <td>{{ sale.product }}</td>
                     <td>{{ sale.quantity_sold }}</td>
                     <td>{{ sale.sale_price }}</td>
+                    <td>{{ sale.product.price_bought }}</td>  <!-- Assuming the cost price is stored in the Product model -->
+                    <td>{{ sale.profit }}</td>
                     <!-- Add other sale fields as needed -->
                 </tr>
             {% empty %}

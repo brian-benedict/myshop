@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Reservation List
+{% endblock %}
+
+{% block content %}
+    <h1>Reservation List</h1>
+    <a href="{% url 'register_reservation' %}" class="btn btn-primary mb-3">Add Reservation</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Product Reserved</th>
+                <th>Target Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.customer_name }}</td>
+                    <td>{{ reservation.product_reserved }}</td>
+                    <td>{{ reservation.target_amount }}</td>
+                    <td>
+                        <a href="{% url 'reservation_payments' reservation.id %}" class="btn btn-primary">View Payments</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">No reservations available</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
