@@ -34,6 +34,65 @@ def category_detail(request, pk):
 
 
 
+# views.py
+
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Category
+from .forms import CategoryForm
+
+# def category_list(request):
+#     categories = Category.objects.all()
+#     return render(request, 'category_list.html', {'categories': categories})
+
+# def category_detail(request, category_id):
+#     category = get_object_or_404(Category, pk=category_id)
+#     return render(request, 'category_detail.html', {'category': category})
+
+def add_category(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('category_list')
+    else:
+        form = CategoryForm()
+    return render(request, 'records/add_category.html', {'form': form})
+
+def edit_category(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect('category_list')
+    else:
+        form = CategoryForm(instance=category)
+    return render(request, 'records/edit_category.html', {'form': form, 'category': category})
+
+def delete_category(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    if request.method == 'POST':
+        category.delete()
+        return redirect('category_list')
+    return render(request, 'records/delete_category.html', {'category': category})
+
+
+# def add_category(request):
+#     if request.method == 'POST':
+#         form = CategoryForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('category_list')
+#     else:
+#         form = CategoryForm()
+#     return render(request, 'records/add_category.html', {'form': form})
+
+
+
+
+
+
+
 from django.shortcuts import render, redirect
 from .models import Product, Category
 from .forms import ProductForm, CategoryForm
@@ -217,15 +276,6 @@ def reservation_detail(request, reservation_id):
 
 
 
-def add_category(request):
-    if request.method == 'POST':
-        form = CategoryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('category_list')
-    else:
-        form = CategoryForm()
-    return render(request, 'records/add_category.html', {'form': form})
 
 
 

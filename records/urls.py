@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('add/product/', views.add_product, name='add_product'),
-    path('add/category/', views.add_category, name='add_category'),
+    # path('add/category/', views.add_category, name='add_category'),
     path('', views.home, name='home'),
     path('products/', views.product_list, name='product_list'),
     path('products/<int:pk>/', views.product_detail, name='product_detail'),
@@ -23,7 +23,10 @@ urlpatterns = [
     path('reservations/register/', views.register_reservation, name='register_reservation'),
     path('reservations/<int:reservation_id>/add_payment/', views.add_reservation_payment, name='add_reservation_payment'),
     path('reservations/<int:reservation_id>/', views.reservation_detail, name='reservation_detail'),
-
+    path('categories/<int:category_id>/', views.category_detail, name='category_detail'),
+    path('categories/add/', views.add_category, name='add_category'),
+    path('categories/<int:category_id>/edit/', views.edit_category, name='edit_category'),
+    path('categories/<int:category_id>/delete/', views.delete_category, name='delete_category'),
     # Add other URLs as needed
 ]
 
